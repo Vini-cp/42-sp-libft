@@ -10,7 +10,13 @@ ft_isspace.c ft_max.c ft_min.c ft_memdel.c ft_strrev.c get_next_line.c\
 ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-OBJ = $(SRC:.c=.o)
+FOLDER = src
+
+SRCS = $(addprefix ${FOLDER}/, ${SRC})
+
+OBJ = $(SRCS:.c=.o)
+
+INCLUDE = -I./include
 
 CFLAGS += -Wall -Werror -Wextra -I./ -c
 
@@ -19,13 +25,14 @@ CFLAGS += -Wall -Werror -Wextra -I./ -c
 all:    $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $(CFLAGS) $(SRC)
-	ar rc $(NAME) $(OBJ)
+	@gcc $(CFLAGS) $(SRCS)
+	@ar rc $(NAME) $(OBJ)
+	@rm *.o
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re:     fclean all
