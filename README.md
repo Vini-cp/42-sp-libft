@@ -18,6 +18,7 @@ isdigit							isalnum
 isascii							isprint
 toupper							tolower
 calloc							strdup
+abs								isspace
 ```
 &nbsp;
 
@@ -129,6 +130,67 @@ void ft_putnbr_fd(int n, int fd);
 ```
 
 *Outputs the integer ’n’ to the given file descriptor.*
+
+----
+
+#### **ft_isnegative**
+
+```C
+int	ft_isnegative(int num);
+```
+
+*Outputs ’1’ if the given number is negative, otherwise '0'.*
+
+----
+
+#### **ft_max**
+
+```C
+int	ft_max(int a, int b);
+```
+
+*Outputs the max 'n' between two numbers.*
+
+----
+
+#### **ft_min**
+
+```C
+int	ft_min(int a, int b);
+```
+
+*Outputs the max 'n' between two numbers.*
+
+----
+
+#### **ft_memdel**
+
+```C
+int	ft_memdel(void **ptr);
+```
+
+*Free a pointer and outputs '1' if the operation has succeeded, otherwise '0'.*
+
+----
+
+#### **ft_strrev**
+
+```C
+void ft_strrev(char *str);
+```
+
+*Reverse all elements of an array.*
+
+
+----
+
+#### **get_next_line**
+
+```C
+int	get_next_line(int fd, char **line);
+```
+
+*Calling get_next_line in a loop will then allow you to read the text available on a file descriptor one line at a time until the EOF.*
 
 &nbsp;
 
