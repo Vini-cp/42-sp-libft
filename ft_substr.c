@@ -6,7 +6,7 @@
 /*   By: vcordeir <vcordeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 22:52:42 by vcordeir          #+#    #+#             */
-/*   Updated: 2021/02/17 22:43:36 by vcordeir         ###   ########.fr       */
+/*   Updated: 2021/03/19 20:43:05 by vcordeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start >= ft_strlen(s))
 	{
-		if (!(str = (char*)malloc(sizeof(char))))
+		str = (char *)malloc(sizeof(char));
+		if (!str)
 			return (NULL);
 		str[0] = '\0';
 		return (str);
 	}
-	if (!(str = (char*)malloc((len + 1) * sizeof(char))))
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
 	i = start;
 	while (s[i] != '\0' && len--)
@@ -34,7 +36,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		str[i - start] = s[i];
 		i++;
 	}
-	if (len)
-		str[i - start] = '\0';
+	str[i - start] = '\0';
 	return (str);
 }

@@ -1,79 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vcordeir <vcordeir@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/07 11:36:15 by vcordeir          #+#    #+#             */
-/*   Updated: 2021/02/11 09:54:54 by vcordeir         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
-static	void	rev_array(char *str, int len)
+char	*ft_itoa(int num)
 {
 	int		i;
-	char	c;
+	char	*str;
 
+	if (num == 0)
+		return (str = ft_strdup("0\0"));
+	else if (num == -2147483648)
+		return (str = ft_strdup("-2147483648\0"));
 	i = 0;
-	while (i < len / 2)
+	str = (char *)malloc(12 * sizeof(char));
+	if (ft_isnegative(num))
+		num *= -1;
+	while (num != 0)
 	{
-		c = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = c;
-		i++;
+		str[i++] = num % 10 + '0';
+		num = num / 10;
 	}
-}
-
-static	char	*int_to_str(char *s, unsigned int nb, int neg)
-{
-	int	len;
-
-	len = 0;
-	while (nb)
-	{
-		*s++ = nb % 10 + '0';
-		nb = (nb - nb % 10) / 10;
-		len++;
-	}
-	if (neg)
-	{
-		*s++ = '-';
-		len++;
-	}
-	*s = '\0';
-	rev_array(s - len, len);
-	return (s - len);
-}
-
-static	int		check_neg(int n)
-{
-	if (n < 0)
-		return (1);
-	else
-		return (0);
-}
-
-char			*ft_itoa(int n)
-{
-	int				neg;
-	unsigned int	nb;
-	char			*s;
-
-	neg = check_neg(n);
-	if (neg)
-		nb = n * (-1);
-	else
-		nb = n;
-	if (!(s = (char *)malloc(12 * sizeof(char))))
-		return (NULL);
-	if (nb == 0)
-	{
-		s[0] = '0';
-		s[1] = '\0';
-		return (s);
-	}
-	return (int_to_str(s, nb, neg));
+	if (ft_isnegative(num))
+		str[i++] = '-';
+	str[i] = '\0';
+	ft_strrev(str);
+	return (str);
 }
