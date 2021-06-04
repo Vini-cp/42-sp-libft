@@ -31,7 +31,7 @@ int	ft_atoi(const char *str)
 			bool_first = 0;
 		else if (ft_isdigit(*str))
 			return (calculate_nb(str, mult));
-		else if (!(ft_iswhitespace(*str) && bool_first))
+		else if (!(ft_isspace(*str) && bool_first))
 			return (0);
 		str++;
 	}

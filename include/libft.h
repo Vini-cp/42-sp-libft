@@ -23,7 +23,7 @@ int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_isnegative(int num);
-int					ft_iswhitespace(int c);
+int					ft_isspace(int c);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 int					ft_tolower(int c);
