@@ -7,7 +7,7 @@ static	int	check_initial_conditions(int fd, char ***line, char **static_array)
 		free(*static_array);
 		return (-1);
 	}
-	if (!*t)
+	if (!*static_array)
 		*static_array = ft_calloc(1, sizeof(char));
 	return (1);
 }
@@ -22,7 +22,7 @@ static	int	copy_array(char *static_array, char ***line, int out)
 	return (out);
 }
 
-static	char	new_tmp_array(char *static_array, char **line, int out)
+static	char	*new_tmp_array(char *static_array, char **line, int out)
 {
 	char	*tmp;
 
@@ -45,7 +45,7 @@ int	get_next_line(int fd, char **line)
 	out = read(fd, buf_read, BUFFER_SIZE);
 	while (!ft_strchr(static_array, '\n') && out > 0)
 	{
-		s[out] = '\0';
+		buf_read[out] = '\0';
 		tmp = ft_strjoin(static_array, buf_read);
 		ft_memdel((void **)&static_array);
 		static_array = tmp;
@@ -53,7 +53,7 @@ int	get_next_line(int fd, char **line)
 	}
 	if (copy_array(static_array, &line, out) == -1)
 		return (-1);
-	tmp = new_temp_array(static_array, line);
+	tmp = new_tmp_array(static_array, line, out);
 	ft_memdel((void **)&static_array);
 	static_array = tmp;
 	if (out == 0)

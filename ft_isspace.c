@@ -1,4 +1,4 @@
-int	ft_iswhitespace(int c)
+int	ft_isspace(int c)
 {
 	if ((c >= 7 && c <= 13) || c == 32)
 		return (1);
