@@ -1,7 +1,6 @@
-int	ft_abs(int a, int b)
+int	ft_abs(int a)
 {
-	if (a >= b)
-		return (a - b);
-	else
-		return (b - a);
+	if (a < 0)
+		return (a * -1);
+	return (a);
 }

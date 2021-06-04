@@ -16,7 +16,7 @@ typedef struct s_list
 void				*ft_calloc(size_t nelem, size_t elsize);
 void				ft_bzero(void *s, size_t n);
 int					ft_atoi(const char *str);
-int					ft_abs(int a, int b);
+int					ft_abs(int a);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);

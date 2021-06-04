@@ -18,6 +18,8 @@ OBJ = $(SRCS:.c=.o)
 
 INCLUDE = -I./include
 
+RUNFLAGS = -Wall -Werror -Wextra
+
 CFLAGS += -Wall -Werror -Wextra -I./ -c
 
 .PHONY: all clean fclean re
@@ -36,3 +38,8 @@ fclean: clean
 	@rm -f $(NAME)
 
 re:     fclean all
+
+test:
+	@gcc $(RUNFLAGS) $(TEST) ./$(NAME) \
+	&& ./a.out \
+	&& rm ./a.out
