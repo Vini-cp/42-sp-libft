@@ -18,7 +18,7 @@ isdigit							isalnum
 isascii							isprint
 toupper							tolower
 calloc							strdup
-abs								isspace
+abs							isspace
 ```
 &nbsp;
 
