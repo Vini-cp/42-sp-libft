@@ -1,24 +1,23 @@
 #include "../include/libft.h"
 
-static	int	check_initial_conditions(int fd, char ***line, char **static_array)
+static	int	check_initial_conditions(int fd, char ***line, char **stc)
 {
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 	{
-		free(*static_array);
+		free(*stc);
 		return (-1);
 	}
-	if (!*static_array)
-		*static_array = ft_calloc(1, sizeof(char));
+	if (!*stc)
+		*stc = ft_calloc(1, sizeof(char));
 	return (1);
 }
 
-static	int	copy_array(char *static_array, char ***line, int out)
+static	int	copy_array(char *stc, char ***line, int out)
 {
 	if (out == 0)
-		**line = ft_strdup(static_array);
+		**line = ft_strdup(stc);
 	else if (out > 0)
-		**line = ft_substr(static_array, 0, \
-			(ft_strchr(static_array, '\n') - static_array));
+		**line = ft_substr(stc, 0, (ft_strchr(stc, '\n') - stc));
 	return (out);
 }
 
@@ -35,28 +34,28 @@ static	char	*new_tmp_array(char *static_array, char **line, int out)
 
 int	get_next_line(int fd, char **line)
 {
-	int				out;
-	char			buf_read[BUFFER_SIZE];
-	char			*tmp;
-	static char		*static_array;
+	int			out;
+	char		s[BUFFER_SIZE + 1];
+	char		*tmp;
+	static char	*stc;
 
-	if (check_initial_conditions(fd, &line, &static_array) == -1)
+	out = 1;
+	if (check_initial_conditions(fd, &line, &stc) == -1)
 		return (-1);
-	out = read(fd, buf_read, BUFFER_SIZE);
-	while (!ft_strchr(static_array, '\n') && out > 0)
+	while (!ft_strchr(stc, '\n') && out > 0)
 	{
-		buf_read[out] = '\0';
-		tmp = ft_strjoin(static_array, buf_read);
-		ft_memdel((void **)&static_array);
-		static_array = tmp;
-		out = read(fd, buf_read, BUFFER_SIZE);
+		out = read(fd, s, BUFFER_SIZE);
+		s[out] = '\0';
+		tmp = ft_strjoin(stc, s);
+		ft_memdel((void **)&stc);
+		stc = tmp;
 	}
-	if (copy_array(static_array, &line, out) == -1)
+	if (copy_array(stc, &line, out) == -1)
 		return (-1);
-	tmp = new_tmp_array(static_array, line, out);
-	ft_memdel((void **)&static_array);
-	static_array = tmp;
+	tmp = new_tmp_array(stc, line, out);
+	ft_memdel((void **)&stc);
+	stc = tmp;
 	if (out == 0)
-		return (0 * ft_memdel((void **)&static_array));
+		return (0 * ft_memdel((void **)&stc));
 	return (1);
 }
